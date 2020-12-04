@@ -31,7 +31,6 @@ class Scrapper:
 
                 title_and_description = soup.find("div", {"id": "res"})
                 data = title_and_description.find_all("div", {"class": "rc"})
-                print(data)
                 if not data:
                     break
                 else:

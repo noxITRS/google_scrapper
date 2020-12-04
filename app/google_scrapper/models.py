@@ -8,7 +8,7 @@ class SearchInfo(models.Model):
 
 class SearchRecord(models.Model):
     position = models.IntegerField()
-    link = models.URLField()
+    link = models.URLField(max_length=500)
     search_info = models.ForeignKey(
         SearchInfo, related_name="records", on_delete=models.CASCADE
     )

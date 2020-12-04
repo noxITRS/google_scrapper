@@ -26,6 +26,7 @@ class SearchResultsView(TemplateView):
 
             search_info = SearchInfo(user_ip=user_ip, phrase=phrase)
             search_info.save()
+
             record_objs = [
                 SearchRecord(
                     position=obj["position"], link=obj["link"], search_info=search_info
