@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 
 
 class HomePageView(TemplateView):
-    template_name = template_name = "index.html"
+    template_name = "index.html"
 
 
 class SearchResultsView(TemplateView):

@@ -13,5 +13,5 @@ urlpatterns = [
         cache_page(CACHE_TTL)(SearchResultsView.as_view()),
         name="search_results",
     ),
-    path("", HomePageView.as_view(), name="search_view"),
+    path("", HomePageView.as_view(), name="home_page"),
 ]
