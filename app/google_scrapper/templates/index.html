@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h4>Get information scrapped from Google, type something</h4>
+<form action="{% url 'search_results' %}" method="get">
+    <input name="q" type="text" placeholder="Search...">
+    <input type="submit" value="OK">
+</form>
+{% endblock %}

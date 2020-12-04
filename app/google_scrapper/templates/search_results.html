@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>Your IP address is: {{ user_ip }}</h3>
+{% if results %}
+<h4>Most common words: {% for word in most_common %}{{ word.0 }}{% if not forloop.last %}, {% endif %}{% endfor %}</h4>
+<h4>Searching results:</h4>
+<table id="results">
+    <tr>
+        <th>Position</th>
+        <th>Link</th>
+    </tr>
+    {% for row in results %}
+    <tr>
+        <td>{{ row.position }}</td>
+        <td>
+            <a href={{ row.link }}>{{ row.link }}</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<h1>I'm sorry, you passed wrong value. There's no results.</h1>
+{% endif %}
+{% endblock %}
