@@ -1,7 +1,9 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/vscode,django,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=vscode,django,python
 
+# .env
+
+.env*
 
 ### DS_STORE on macOS ###
 .DS_STORE

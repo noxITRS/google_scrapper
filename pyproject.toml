@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "google_scrapper"
+version = "0.1.0"
+description = "Small web app for google scrapping"
+authors = ["Robert Strzybny <strzybny.robert@gmail.com>"]
+license = "MIT License"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+beautifulsoup4 = "4.9.3"
+bs4 = "0.0.1"
+django-redis = "4.12.1"
+gunicorn = "20.0.4"
+requests = "2.25.0"
+random-user-agent = "^1.0.1"
+psycopg2-binary = "2.8.6"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.9.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
