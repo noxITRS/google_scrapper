@@ -19,7 +19,7 @@ class SearchResultsView(TemplateView):
         phrase = self.request.GET.get("q")
         if phrase:
             scrapper = Scrapper(phrase=phrase)
-            scrapper_results = scrapper.get_data()
+            scrapper_results = scrapper.process()
 
             context["most_common"] = scrapper_results["most_common"]
             context["results"] = scrapper_results["results"]
