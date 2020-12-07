@@ -20,6 +20,13 @@ class Scrapper:
     def url(self):
         return f"https://www.google.com/search?q={self._phrase}&num=100&start={self._start}"
 
+    def _error_message(self, response):
+        context = {
+            "error": "scrapper",
+            "status": response.status_code,
+        }
+        return context
+
     def _get_response(self):
         headers = {"user-agent": self.user_agent}
         return requests.get(self.url, headers=headers)
@@ -29,9 +36,10 @@ class Scrapper:
         title_and_description = soup.find("div", {"id": "res"})
         if not title_and_description:
             text_data = ""
+            rows = None
         else:
             text_data = title_and_description.text
-        rows = title_and_description.find_all("div", {"class": "rc"})
+            rows = title_and_description.find_all("div", {"class": "rc"})
         return {"text_data": text_data, "rows": rows}
 
     def _init_random_user_agent(self):
@@ -50,11 +58,11 @@ class Scrapper:
         self.context["results"] = self._results
 
     def _update_most_common(self, n):
-        text = self.text_data.translate({ord(c): None for c in '"!@#$%^&*()_+.,?\n'})
+        text = self._text_data.translate({ord(c): None for c in '"!@#$%^&*()_+.,?\n'})
         splitted = text.lower().split()
         filtered = filter(lambda x: len(x) > 3, splitted)
         counter = Counter(filtered)
-        self.most_common = counter.most_common(n)
+        self._most_common = counter.most_common(n)
 
     def _update_results(self, rows):
         for idx, res in enumerate(rows):
@@ -84,8 +92,8 @@ class Scrapper:
                     break
 
             else:
-                break
+                return self._error_message(response)
 
-        self._update_most_common()
+        self._update_most_common(10)
         self._update_context()
         return self.context

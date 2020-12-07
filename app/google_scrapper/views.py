@@ -21,6 +21,13 @@ class SearchResultsView(TemplateView):
             scrapper = Scrapper(phrase=phrase)
             scrapper_results = scrapper.process()
 
+            if "error" in scrapper_results:
+                context["error"] = {
+                    "code": scrapper_results["error"],
+                    "status_code": scrapper_results["status"],
+                }
+                return context
+
             context["most_common"] = scrapper_results["most_common"]
             context["results"] = scrapper_results["results"]
 
@@ -33,8 +40,10 @@ class SearchResultsView(TemplateView):
                 )
                 for obj in scrapper_results["results"]
             ]
-
             SearchRecord.objects.bulk_create(record_objs)
+        else:
+            context["error"] = {"code": "param"}
+
         return context
 
     def get_client_ip(self):
